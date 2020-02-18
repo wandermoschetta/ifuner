@@ -1,5 +1,5 @@
 # IFuner
-Project for management for the funeral home.
+Project for management to funeral home.
 
 ## How to run the project:
 
