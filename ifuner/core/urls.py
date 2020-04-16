@@ -1,7 +1,8 @@
 from django.urls import path
-#from . import views
+from ifuner.core import views as v
 
+app_name = 'core'
 
-#urlpatterns = [
-#    path('', views.index, name='index'),
-#]
+urlpatterns=[
+    path('', v.index, name='index'),
+]

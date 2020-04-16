@@ -15,11 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-#from ifuner.core import urls
-from ifuner.core.views import index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #path('index/', include('core.urls')),
-    path('', index, name='index'),
+    path('', include('ifuner.core.urls')),
 ]
