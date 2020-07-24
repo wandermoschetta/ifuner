@@ -22,27 +22,23 @@
       <div class="container">
         <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
 
-          <form class="col s12" method="post">
+          <form class="col s12" action="login" method="post">
             {% csrf_token %}
-            <!--<div class='row'>
-              <div class='col s12'>
-              </div>
+            {% for message in messages %}
+            <div class='row'>
+                <h6 style="color:red"><i class="material-icons">error_outline</i> {{message}}</h6>
             </div>
-            -->
+            {% endfor %}
             <div class='row'>
               <div class='input-field col s12'>
-                  {{form_login.username.errors}}
-                  <input class='validate' type='text' name='username' id='email' />
-                {{form_login.username}}
-                <label for='email'>Informe seu email</label>
+                <input class='validate' type='text' name='username' id='email' />
+                <label for='email'>Informe seu usuário</label>
               </div>
             </div>
 
             <div class='row'>
               <div class='input-field col s12'>
-                {{form_login.password.errors}}
                 <input class='validate' type='password' name='password' id='password' />
-                {{form_login.password}}
                 <label for='password'>Informe sua senha</label>
               </div>
               <label style='float: right;'>

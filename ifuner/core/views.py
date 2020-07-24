@@ -1,10 +1,12 @@
-from django.contrib.auth import authenticate
 from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.contrib.auth.models import User, auth
 
 
 def index(request):
     template_name = 'index.html'
     return render(request, template_name)
+
 
 def login(request):
     template_name = 'index.html'
@@ -12,20 +14,14 @@ def login(request):
         username = request.POST["username"]
         password = request.POST["password"]
         print("email: {}  senha: {} ".format(username, password))
-
-        usuario = authenticate(request, username=username, password=password)
-        print("usuario ", usuario)
-        if usuario is not None:
-            # login(request, usuario)
-            print("usuario ", usuario)
-            form_login = "index"
-            return redirect('index')
+        user = auth.authenticate(username=username, password=password)
+        print("usuario ", user)
+        if user is not None:
+            auth.login(request, user)
+            print("usuario ", user)
+            return redirect('/')
         else:
-           form_login = "login"
-
+            messages.info(request, 'Usuário ou senha inválido.')
+            return redirect('/login')
     else:
-        form_login = "login"
-
-    return render(request, 'login.html', {'form_login': form_login})
-
-
+        return render(request, 'login.html')
