@@ -28,18 +28,26 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1', cast=Csv())
 
 
 # Application definition
-
-INSTALLED_APPS = [
+SHARED_APPS = (
+    'django_tenants',
+    'ifuner.customers',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+)
+
+TENANT_APPS = (
+    'django.contrib.contenttypes',
     'ifuner.core',
-]
+)
+
+INSTALLED_APPS = list(SHARED_APPS) + [app for app in TENANT_APPS if app not in SHARED_APPS]
 
 MIDDLEWARE = [
+    'django_tenants.middleware.main.TenantMainMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -75,7 +83,8 @@ WSGI_APPLICATION = 'ifuner.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django_tenants.postgresql_backend',
         'NAME': 'ifuner',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
@@ -123,3 +132,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+TENANT_MODEL = "customers.Client" # app.Model
+TENANT_DOMAIN_MODEL = "customers.Domain"  # app.Model
+
+DATABASE_ROUTERS = (
+    'django_tenants.routers.TenantSyncRouter',
+)
