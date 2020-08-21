@@ -31,9 +31,9 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1', cast=Csv())
 SHARED_APPS = (
     'django_tenants',
     'ifuner.customers',
+    'django.contrib.contenttypes',
     'django.contrib.admin',
     'django.contrib.auth',
-    'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
@@ -133,8 +133,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-TENANT_MODEL = "customers.Client" # app.Model
-TENANT_DOMAIN_MODEL = "customers.Domain"  # app.Model
+# app.Model
+TENANT_MODEL = "customers.Client"
+# app.Model
+TENANT_DOMAIN_MODEL = "customers.Domain"
 
 DATABASE_ROUTERS = (
     'django_tenants.routers.TenantSyncRouter',
