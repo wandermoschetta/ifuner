@@ -25,3 +25,8 @@ def login(request):
             return redirect('/login')
     else:
         return render(request, 'login.html')
+
+
+def signup(request):
+    template_name = 'signup.html'
+    return render(request, template_name)

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iFuner - Cadastro do Usuário</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="../static/css/signup.css">
+    {% block css %}
+    {% endblock css %}
+</head>
+<body>
+ <div class="section"></div>
+  <main>
+    <center>
+      <img class="responsive-img" style="width: 150px; margin-top:-20px;" src="../static/img/dash_paper_plane.svg" />
+
+      <h5 class="indigo-text">Cadastre sua conta</h5>
+
+      <div class="container">
+        <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 10px 80px 0px 80px; border: 1px solid #EEE;">
+
+          <form class="col s12" action="signup" method="post">
+            {% csrf_token %}
+            {% for message in messages %}
+            <div class='row'>
+                <h6 style="color:red"><i class="material-icons">error_outline</i> {{message}}</h6>
+            </div>
+            {% endfor %}
+            <div class='row'>
+              <div class='input-field col s12' style="width:500px">
+                <input class='validate' type='text' name='username' id='username' />
+                <label for='username'>Seu nome completo</label>
+              </div>
+            </div>
+
+            <div class='row'>
+              <div class='input-field col s12'>
+                <input class='validate' type='email' name='email' id='email' />
+                <label for='email'>Email profissional(será seu nome de usuário)</label>
+                <span class="helper-text" data-error="email incorreto" data-success="right">Helper text</span>
+              </div>
+            </div>
+
+            <div class='row'>
+              <div class='input-field col s12'>
+                <input class='validate' type='text' name='telefone' id='telefone' />
+                <label for='telefone'>Telefone da empresa/responsável</label>
+              </div>
+            </div>
+             <div class='row'>
+              <div class='input-field col s12'>
+                <input class='validate' type='text' name='empresa' id='empresa' />
+                <label for='empresa'>Empresa</label>
+              </div>
+            </div>
+
+            <div class='row'>
+              <div class='input-field col s12'>
+                <input class='validate' type='password' name='password' id='password' />
+                <label for='password'>Informe sua senha de acesso</label>
+              </div>
+            </div>
+            <div class='row'>
+              <div class='input-field col s12'>
+                <input class='validate' type='password' name='password' id='password' />
+                <label for='password'>Confirme sua senha de acesso</label>
+              </div>
+            </div>
+            <br />
+            <center>
+              <div class='row'>
+                <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect indigo'>Crie sua conta</button>
+              </div>
+            </center>
+          </form>
+        </div>
+      </div>
+
+    </center>
+
+    <div class="section"></div>
+    <div class="section"></div>
+  </main>
+
+
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    {% block js %}{% endblock js %}
+
+</body>
+</html>

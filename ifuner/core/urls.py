@@ -7,4 +7,5 @@ urlpatterns = [
     path('', v.index, name='index'),
     path('login', v.login, name='login'),
     path('site', site.index, name='index'),
+    path('signup', v.signup, name='signup'),
 ]
